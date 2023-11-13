@@ -1,14 +1,16 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useMenuStore } from "../../stores/menu";
+import { useAuthStore } from "../../stores/auth";
 
 const menuStore = useMenuStore();
+const authStore = useAuthStore();
 const { menuList } = storeToRefs(menuStore);
 const { changeMenuState } = menuStore;
 
 const logout = () => {
   console.log("logout!!!!!");
-
+  authStore.logout();
   changeMenuState();
 };
 </script>
