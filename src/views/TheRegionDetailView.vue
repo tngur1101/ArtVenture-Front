@@ -2,9 +2,12 @@
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import { detailRegion } from "@/api/region";
+import VKakaoMap from "@/components/regions/VKakaoMap.vue";
+
 const route = useRoute();
 const { regionId } = route.params;
 const region = ref({});
+const selectPlace = ref({});
 
 console.log(route.params.regionId);
 
@@ -29,6 +32,8 @@ const getRegion = () => {
 
 <template>
   <div>{{ route.params.regionId }}번 지역 이동</div>
+  <VKakaoMap :places="region.featList" :selectPlace="selectPlace" />
+  <div>map 들어갈 자리</div>
   <div>
     <h3>클리어 한 업적</h3>
     <table>
