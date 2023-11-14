@@ -4,7 +4,6 @@ import { ref, watch, onMounted } from "vue";
 var map;
 const positions = ref([]);
 const markers = ref([]);
-const selectPlace = ref({});
 const props = defineProps({ places: Array, selectPlace: Object });
 
 watch(
