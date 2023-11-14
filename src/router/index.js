@@ -10,6 +10,11 @@ const router = createRouter({
       component: TheMainView,
     },
     {
+      path: "/region/:regionId",
+      name: "region",
+      component: () => import("@/views/TheRegionDetailView.vue"),
+    },
+    {
       path: "/user",
       name: "user",
       component: () => import("@/views/TheUserView.vue"),
