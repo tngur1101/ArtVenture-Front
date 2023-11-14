@@ -2,6 +2,7 @@
 <!-- 지역 이름, 지역 코드를 받아오면 반복문 돌려서 내부에 RegionCard를 찍어야 함 -->
 <!--  -->
 <script setup>
+import { ref } from "vue";
 import { RouterView } from "vue-router";
 import { getSidoList } from "@/api/region";
 import RegionCard from "../components/regions/RegionCard.vue";
@@ -13,7 +14,9 @@ onMounted(() => {
   console.log("sidoList 얻어오자");
   getSidoList(
     ({ data }) => {
-      // regions.value = data.
+      regions.value = data;
+      //   console.log("data : ", data);
+      //   console.log("region : ", regions.value);
     },
     (error) => {
       console.log(error);

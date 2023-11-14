@@ -1,10 +1,16 @@
+import { useAuthStore } from "../stores/auth";
 import { localAxios } from "../utils/http-commons";
 
+console.log("regins.js");
 const local = localAxios();
 
 function detailRegion(regionId, success, fail) {
+  const authStore = useAuthStore();
   console.log("지역 정보 요청 : ", regionId);
-  local.get(`/region/${regionId}`).then(success).catch(fail);
+  local
+    .post(`/region/${regionId}`, { params: authStore.user })
+    .then(success)
+    .catch(fail);
 }
 
 function getSidoList(success, fail) {

@@ -10,12 +10,12 @@ const router = useRouter();
 
 const onRegionClick = () => {
   console.log("지역 클릭");
-  router.push(`detail/${props.value.regionId}`);
+  console.log(props.regionObj);
+  router.push(`/region/${props.regionObj.sidoId}`);
 };
 </script>
 
 <template>
-  <div>지역 카드</div>
   <div @click="onRegionClick">{{ props.regionObj.name }}</div>
 </template>
 
