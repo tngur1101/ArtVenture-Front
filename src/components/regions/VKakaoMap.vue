@@ -29,7 +29,7 @@ onMounted(() => {
     const script = document.createElement("script");
     // autoload=false 설정 필수
     // 그림 그리려면 drawing library 추가해야 함
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${
+    script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${
       import.meta.env.VITE_KAKAO_MAP_SERVICE_KEY
     }&libraries=services,clusterer`;
     /* global kakao */
@@ -39,7 +39,7 @@ onMounted(() => {
 });
 
 watch(
-  () => props.places.value,
+  () => props.places,
   () => {
     positions.value = [];
     props.places.forEach((place) => {
