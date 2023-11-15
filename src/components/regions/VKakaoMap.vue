@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, onBeforeUpdate } from "vue";
 
 var map;
 const positions = ref([]);
@@ -23,9 +23,11 @@ watch(
 );
 
 onMounted(() => {
+  console.log("KakaoMap onMounted() 호출");
   if (window.kakao && window.kakao.maps) {
     initMap();
   } else {
+    console.log("map javascript load 실행");
     const script = document.createElement("script");
     // autoload=false 설정 필수
     // 그림 그리려면 drawing library 추가해야 함
@@ -38,31 +40,36 @@ onMounted(() => {
   }
 });
 
-watch(
-  () => props.places,
-  () => {
-    positions.value = [];
-    props.places.forEach((place) => {
-      let obj = {};
-      obj.latlng = new kakao.maps.LatLng(place.latitude, place.longitude);
-      obj.title = place.name;
-
-      positions.value.push(obj);
-    });
-    loadMarkers();
-  },
-  { deep: true }
-);
+onBeforeUpdate(() => {
+  console.log("onBeforeUpdate 실행");
+  if (window.kakao && window.kakao.maps) {
+    initMap();
+  }
+});
 
 const initMap = () => {
+  console.log("initMap 실행");
   const container = document.getElementById("map");
   const options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
     level: 3,
   };
   map = new kakao.maps.Map(container, options);
+  getPosition();
+  loadMarkers();
+};
 
-  // loadMarkers();
+const getPosition = () => {
+  console.log("getPosition 실행");
+  positions.value = [];
+
+  props.places.forEach((place) => {
+    let obj = {};
+    obj.latlng = new kakao.maps.LatLng(place.latitude, place.longitude);
+    obj.title = place.name;
+
+    positions.value.push(obj);
+  });
 };
 
 const loadMarkers = () => {
