@@ -22,6 +22,12 @@ const logout = () => {
         <ul>
           <template v-for="menu in menuList" :key="menu.routeName">
             <template v-if="menu.show">
+              <li>
+                <router-link to="/">홈</router-link>
+              </li>
+              <li>
+                <router-link to="/board">게시판</router-link>
+              </li>
               <template v-if="menu.routeName === 'user-logout'">
                 <li>
                   <router-link to="/" @click.prevent="logout">{{
