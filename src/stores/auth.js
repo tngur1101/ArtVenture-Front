@@ -39,6 +39,10 @@ export const useAuthStore = defineStore(
       token.value = "";
     };
 
+    const registUser = async (user) => {
+      //user등록 api 받는 코드 첨가
+    }
+
     return { user, token, login, logout, clearUser };
   },
 
