@@ -5,6 +5,8 @@ import BoardList from "@/views/BoardView/BoardList.vue";
 import BoardWrite from "@/views/BoardView/BoardWrite.vue";
 import BoardDetail from "@/views/BoardView/BoardDetail.vue";
 import BoardModify from "@/views/BoardView/BoardModify.vue";
+import UserRegist from "@/components/users/UserRegist.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,9 +27,14 @@ const router = createRouter({
       component: () => import("@/views/TheUserView.vue"),
       children: [
         {
-          path: "login",
+          path: "/login",
           name: "user-login",
           component: () => import("@/components/users/UserLogin.vue"),
+        },
+        {
+          path:"/regist",
+          name:"user-regist",
+          component: UserRegist,
         },
       ],
     },
