@@ -1,9 +1,25 @@
 <script setup>
-import { RouterView } from "vue-router";
+import { RouterView, useRouter } from "vue-router";
+import {ref, computed} from "vue";
+import {useBoardStore} from "@/stores/board";
 import TheUserView from "./TheUserView.vue";
 import TheRegionView from "./TheRegionView.vue";
 import BoardView from "@/views/BoardView.vue";
 
+const boardStore = useBoardStore();
+const router = useRouter();
+
+const articles = computed(()=>boardStore.articles);
+
+const params = ref({
+  key:"",
+  word:"",
+  pgno:1,
+  spp:6,
+  type:"1",
+});
+
+boardStore.getArticles(params.value);
 
   const data = () => {
     model:null;
@@ -79,10 +95,10 @@ import BoardView from "@/views/BoardView.vue";
           <v-sheet class="pa-2 ma-2">
             <v-list lines="two">
   <v-list-item
-    v-for="n in 3"
-    :key="n"
-    :title="'Item ' + n"
-    subtitle="Lorem ipsum dolor sit amet consectetur adipisicing elit"
+    v-for="article in articles"
+    :key="article.articleNo"
+    :title="article.title"
+    :items="article.content"
   ></v-list-item>
 </v-list>
           </v-sheet>
