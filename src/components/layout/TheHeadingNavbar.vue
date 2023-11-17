@@ -1,9 +1,10 @@
 <script setup>
+import {useRouter} from "vue-router";
 import { storeToRefs } from "pinia";
 import { useMenuStore } from "../../stores/menu";
 import { useAuthStore } from "../../stores/auth";
 
-
+const router = useRouter();
 const menuStore = useMenuStore();
 const authStore = useAuthStore();
 const { menuList } = storeToRefs(menuStore);
@@ -15,13 +16,22 @@ const logout = () => {
   changeMenuState();
 };
 
+const moveList = () => {
+  router.push({name:"whole-article-list"});
+}
+
+const moveMain = () => {
+  router.push({name:"main"});
+}
+
 </script>
 
 <template>
   <v-app-bar :elevation="1">
-    <v-app-bar-title style="cursor: pointer;">
+    <v-app-bar-title style="cursor: pointer;" @click="moveMain">
       Artventure
     </v-app-bar-title>
+    <v-btn @click="moveList">게시판</v-btn>
     <template v-for="menu in menuList" :key="menu.routeName">
       <template v-if="menu.show">
       <template v-if="menu.routeName === 'user-logout'">
