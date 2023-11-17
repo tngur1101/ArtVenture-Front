@@ -40,50 +40,42 @@ const getRegion = () => {
     }
   );
 };
+
+const clickPlace = (nowPlace) => {
+  console.log(nowPlace);
+  selectPlace.value = nowPlace;
+};
 </script>
 
 <template>
   <div>{{ route.params.regionId }}번 지역 이동</div>
   <VKakaoMap :places="places" :selectPlace="selectPlace" />
   <div>
-    <h3>클리어 한 업적</h3>
-    <table>
-      <tr>
-        <th>featId</th>
-        <th>featTime</th>
-      </tr>
-      <tr v-for="complete in region.completeList" :key="complete">
-        <td>{{ complete.featId }}</td>
-        <td>{{ complete.featTime }}</td>
-      </tr>
-    </table>
-    <hr />
-    <h3>전체 업적</h3>
-    <table>
-      <tr>
-        <th>regionId</th>
-        <th>order</th>
-        <th>featId</th>
-        <th>name</th>
-        <th>latitude</th>
-        <th>longitude</th>
-      </tr>
-      <tr v-for="feat in region.featList" :key="feat">
-        <td>{{ feat.regionId }}</td>
-        <td>{{ feat.order }}</td>
-        <td>{{ feat.featId }}</td>
-        <td>{{ feat.name }}</td>
-        <td>{{ feat.latitude }}</td>
-        <td>{{ feat.longitude }}</td>
-      </tr>
-    </table>
-  </div>
-  <div>
+    <h3>달성 업적</h3>
     <v-container>
       <v-row>
-        <v-col v-for="(item, index) in places" :key="index" cols="2">
+        <v-col v-for="item in region.completeList" :key="item.featId" cols="2">
           <!-- cols 값은 가로 방향으로 카드를 배치할 개수를 나타냅니다 -->
-          <v-card class="unaccomplished">
+          <v-card class="accomplished" hover @click="clickPlace(item)">
+            <v-img
+              src="https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg"
+            >
+            </v-img>
+            <v-card-title>{{ item.name }}</v-card-title>
+            <v-card-text>{{ item.description }}</v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
+  <div>
+    <hr />
+    <h3>미달성 업적</h3>
+    <v-container>
+      <v-row>
+        <v-col v-for="item in notComplete" :key="item.featId" cols="2">
+          <!-- cols 값은 가로 방향으로 카드를 배치할 개수를 나타냅니다 -->
+          <v-card class="unaccomplished" hover @click="clickPlace(item)">
             <v-img
               src="https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg"
             >
@@ -98,8 +90,12 @@ const getRegion = () => {
 </template>
 
 <style scoped>
+.accomplished {
+  background-color: lightgoldenrodyellow;
+}
 .unaccomplished {
-  filter: grayscale(80%);
-  background-color: gray;
+  filter: grayscale(50%);
+  background-color: lightgray;
+  /* background-color: rgb(200, 200, 200); */
 }
 </style>
