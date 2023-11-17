@@ -14,6 +14,7 @@ export const useBoardStore = defineStore("board", ()=>{
         const {data} = await local.get(`/board`, {
             params,
         });
+        console.log("params: ", params);
         console.log("getArticles의 응답 데이터 : ", data);
 
         articles.value = data.articles;
