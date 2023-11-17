@@ -16,7 +16,21 @@ const onRegionClick = () => {
 </script>
 
 <template>
-  <div @click="onRegionClick">{{ props.regionObj.name }}</div>
+  <div>
+    <v-card :class="['ma-4']" height="200" width="200" @click="onRegionClick">
+      <v-img
+        class="align-end text-white"
+        height="150"
+        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+        cover
+      >
+        <v-card-title>{{ props.regionObj.name }}</v-card-title>
+      </v-img>
+      <v-card-subtitle class="pt-4">
+        {{ props.regionObj.sidoId }}
+      </v-card-subtitle>
+    </v-card>
+  </div>
 </template>
 
 <style scoped></style>

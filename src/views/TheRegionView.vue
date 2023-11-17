@@ -34,24 +34,8 @@ onMounted(() => {
         selected-class="bg-success"
         show-arrows
       >
-        <v-slide-group-item
-          v-for="region in regions"
-          :key="region.regionId"
-          v-slot="{ isSelected, toggle, selectedClass }"
-        >
-          <v-card :class="['ma-4']" height="200" width="200" @click="toggle">
-            <v-img
-              class="align-end text-white"
-              height="150"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-              cover
-            >
-              <v-card-title>{{ region.name }}</v-card-title>
-            </v-img>
-            <v-card-subtitle class="pt-4">
-              {{ region.sidoId }}
-            </v-card-subtitle>
-          </v-card>
+        <v-slide-group-item v-for="region in regions" :key="region.regionId">
+          <region-card :region-obj="region" />
         </v-slide-group-item>
       </v-slide-group>
     </v-sheet>
