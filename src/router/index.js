@@ -44,9 +44,17 @@ const router = createRouter({
       component: BoardView,
       redirect: "/board/list",
       children: [
-        //BoardList
+        //BoardList without type
         {
           path: "list",
+          name:"whole-article-list",
+          component: BoardList,
+        },
+
+        //BoardList with type
+        {
+          path: "list/:type",
+          name:"article-list",
           component: BoardList,
         },
 
