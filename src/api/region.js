@@ -8,7 +8,7 @@ function detailRegion(regionId, success, fail) {
   const authStore = useAuthStore();
   console.log("지역 정보 요청 : ", regionId);
   local
-    .post(`/region/${regionId}`, { params: authStore.user })
+    .post(`/region/${regionId}`, { userId: authStore.user.id })
     .then(success)
     .catch(fail);
 }
