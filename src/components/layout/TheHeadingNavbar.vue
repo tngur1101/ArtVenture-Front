@@ -23,6 +23,11 @@ const moveList = () => {
 const moveMain = () => {
   router.push({ name: "main" });
 };
+
+const moveMyPage = () => {
+  // console.log("move mypage");
+  router.push({ name: "my-page" });
+};
 </script>
 
 <template>
@@ -34,7 +39,9 @@ const moveMain = () => {
     <template v-for="menu in menuList" :key="menu.routeName">
       <template v-if="menu.show">
         <template v-if="menu.routeName === 'user-logout'">
-          <v-avatar color="info"><span class="text-h5">KYJ</span></v-avatar>
+          <v-avatar color="info" class="profile" @click="moveMyPage"
+            ><span class="text-h5">KYJ</span></v-avatar
+          >
           <v-btn
             ><router-link to="/" @click.prevent="logout">{{
               menu.name
@@ -53,4 +60,8 @@ const moveMain = () => {
   </v-app-bar>
 </template>
 
-<style scoped></style>
+<style scoped>
+.profile {
+  cursor: pointer;
+}
+</style>

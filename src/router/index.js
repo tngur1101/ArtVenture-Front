@@ -35,6 +35,11 @@ const router = createRouter({
           name: "user-regist",
           component: UserRegist,
         },
+        {
+          path: "/mypage",
+          name: "my-page",
+          component: () => import("@/components/users/UserMyPage.vue"),
+        },
       ],
     },
     //BoardView
