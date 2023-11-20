@@ -50,71 +50,75 @@ const clickPlace = (nowPlace) => {
 </script>
 
 <template>
-  <div>{{ route.params.regionId }}번 지역 이동</div>
-  <div class="map-container">
-    <VKakaoMap
-      v-if="places.length > 0"
-      :places="places"
-      :selectPlace="selectPlace"
-      :completePlaces="region.completeList"
-    />
-    <div class="right">
-      <RegionBoard :regionId="regionId" />
-      <region-description :featObj="selectPlace" />
+  <div class="margin">
+    <div class="map-container">
+      <VKakaoMap
+        v-if="places.length > 0"
+        :places="places"
+        :selectPlace="selectPlace"
+        :completePlaces="region.completeList"
+      />
+      <div class="right">
+        <RegionBoard :regionId="regionId" />
+        <region-description :featObj="selectPlace" />
+      </div>
     </div>
-  </div>
-  <div>
-    <h3>달성 업적</h3>
     <div>
-      <v-sheet class="mx-auto" elevation="8" max-width="100%">
-        <v-slide-group
-          v-model="model"
-          class="pa-4"
-          selected-class="bg-success"
-          show-arrows
-        >
-          <v-slide-group-item
-            v-for="complete in region.completeList"
-            :key="complete.featId"
+      <h3>달성 업적</h3>
+      <div>
+        <v-sheet class="mx-auto" elevation="8" max-width="100%">
+          <v-slide-group
+            v-model="model"
+            class="pa-4"
+            selected-class="bg-success"
+            show-arrows
           >
-            <complete-card
-              class="accomplished"
-              :card-obj="complete"
-              @click-card="clickPlace(complete)"
-            />
-          </v-slide-group-item>
-        </v-slide-group>
-      </v-sheet>
+            <v-slide-group-item
+              v-for="complete in region.completeList"
+              :key="complete.featId"
+            >
+              <complete-card
+                class="accomplished"
+                :card-obj="complete"
+                @click-card="clickPlace(complete)"
+              />
+            </v-slide-group-item>
+          </v-slide-group>
+        </v-sheet>
+      </div>
     </div>
-  </div>
-  <br />
-  <div>
-    <h3>미달성 업적</h3>
+    <br />
     <div>
-      <v-sheet class="mx-auto" elevation="8" max-width="100%">
-        <v-slide-group
-          v-model="model"
-          class="pa-4"
-          selected-class="bg-success"
-          show-arrows
-        >
-          <v-slide-group-item
-            v-for="uncomplete in notComplete"
-            :key="uncomplete.featId"
+      <h3>미달성 업적</h3>
+      <div>
+        <v-sheet class="mx-auto" elevation="8" max-width="100%">
+          <v-slide-group
+            v-model="model"
+            class="pa-4"
+            selected-class="bg-success"
+            show-arrows
           >
-            <complete-card
-              class="unaccomplished"
-              :card-obj="uncomplete"
-              @click-card="clickPlace(uncomplete)"
-            />
-          </v-slide-group-item>
-        </v-slide-group>
-      </v-sheet>
+            <v-slide-group-item
+              v-for="uncomplete in notComplete"
+              :key="uncomplete.featId"
+            >
+              <complete-card
+                class="unaccomplished"
+                :card-obj="uncomplete"
+                @click-card="clickPlace(uncomplete)"
+              />
+            </v-slide-group-item>
+          </v-slide-group>
+        </v-sheet>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.margin {
+  margin-top: 5%;
+}
 .accomplished {
   background-color: lightgoldenrodyellow;
 }
