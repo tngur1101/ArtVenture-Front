@@ -124,14 +124,14 @@ const drawLines = () => {
   lines.value = [];
 
   for (let i = 0; i < props.completePlaces.length; i++) {
-    console.log(props.completePlaces[i]);
+    // console.log(props.completePlaces[i]);
     var complete = props.completePlaces[i];
     lines.value.push(
       new kakao.maps.LatLng(complete.latitude, complete.longitude)
     );
   }
 
-  console.log("lines.value : ", lines.value);
+  // console.log("lines.value : ", lines.value);
   var polyline = new kakao.maps.Polyline({
     path: lines.value, // 선을 구성하는 좌표배열 입니다
     strokeWeight: 5, // 선의 두께 입니다
@@ -152,7 +152,7 @@ const drawLines = () => {
 <style>
 #map {
   /* margin-top: 5%; */
-  width: 70%;
-  height: 700px;
+  width: 60%;
+  height: 600px;
 }
 </style>

@@ -4,6 +4,8 @@ import { useRoute } from "vue-router";
 import { detailRegion } from "@/api/region";
 import VKakaoMap from "@/components/regions/VKakaoMap.vue";
 import RegionBoard from "../components/regions/RegionBoard.vue";
+import CompleteCard from "../components/regions/CompleteCard.vue";
+import RegionDescription from "../components/regions/RegionDescription.vue";
 
 const route = useRoute();
 const { regionId } = route.params;
@@ -56,44 +58,59 @@ const clickPlace = (nowPlace) => {
       :selectPlace="selectPlace"
       :completePlaces="region.completeList"
     />
-    <RegionBoard :regionId="regionId" class="board" />
+    <div class="right">
+      <RegionBoard :regionId="regionId" />
+      <region-description :featObj="selectPlace" />
+    </div>
   </div>
   <div>
     <h3>달성 업적</h3>
-    <v-container>
-      <v-row>
-        <v-col v-for="item in region.completeList" :key="item.featId" cols="2">
-          <!-- cols 값은 가로 방향으로 카드를 배치할 개수를 나타냅니다 -->
-          <v-card class="accomplished" hover @click="clickPlace(item)">
-            <v-img
-              src="https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg"
-            >
-            </v-img>
-            <v-card-title>{{ item.name }}</v-card-title>
-            <v-card-text>{{ item.description }}</v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+    <div>
+      <v-sheet class="mx-auto" elevation="8" max-width="100%">
+        <v-slide-group
+          v-model="model"
+          class="pa-4"
+          selected-class="bg-success"
+          show-arrows
+        >
+          <v-slide-group-item
+            v-for="complete in region.completeList"
+            :key="complete.featId"
+          >
+            <complete-card
+              class="accomplished"
+              :card-obj="complete"
+              @click-card="clickPlace(complete)"
+            />
+          </v-slide-group-item>
+        </v-slide-group>
+      </v-sheet>
+    </div>
   </div>
+  <br />
   <div>
-    <hr />
     <h3>미달성 업적</h3>
-    <v-container>
-      <v-row>
-        <v-col v-for="item in notComplete" :key="item.featId" cols="2">
-          <!-- cols 값은 가로 방향으로 카드를 배치할 개수를 나타냅니다 -->
-          <v-card class="unaccomplished" hover @click="clickPlace(item)">
-            <v-img
-              src="https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg"
-            >
-            </v-img>
-            <v-card-title>{{ item.name }}</v-card-title>
-            <v-card-text>{{ item.description }}</v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+    <div>
+      <v-sheet class="mx-auto" elevation="8" max-width="100%">
+        <v-slide-group
+          v-model="model"
+          class="pa-4"
+          selected-class="bg-success"
+          show-arrows
+        >
+          <v-slide-group-item
+            v-for="uncomplete in notComplete"
+            :key="uncomplete.featId"
+          >
+            <complete-card
+              class="unaccomplished"
+              :card-obj="uncomplete"
+              @click-card="clickPlace(uncomplete)"
+            />
+          </v-slide-group-item>
+        </v-slide-group>
+      </v-sheet>
+    </div>
   </div>
 </template>
 
@@ -115,7 +132,10 @@ const clickPlace = (nowPlace) => {
   justify-content: center;
 }
 
-.board {
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   width: 30%;
 }
 </style>
