@@ -41,6 +41,12 @@ const getSearchArticles = (searchKeyword) => {
 
   boardStore.getArticles(params.value);
 };
+
+const searchInfo = ref({
+  key:"",
+  word:"",
+});
+
 </script>
 
 <template>
@@ -52,7 +58,7 @@ const getSearchArticles = (searchKeyword) => {
           <v-card>
             <v-img
               src="https://picsum.photos/350/165?random"
-              height="300"
+              height="400"
               cover
               class="bg-grey-lighten-2"
             ></v-img>
@@ -61,39 +67,37 @@ const getSearchArticles = (searchKeyword) => {
         </v-row>
       </v-fade-transition>
     </v-container>
-    <h1>게시판 목록</h1>
-    <RouterLink :to="{ name: 'article-write' }">글쓰기</RouterLink>
-
-    <SearchBar
-      @search-event="getSearchArticles"
-      :options="[
-        { value: 'user_id', text: '작성자' },
-        { value: 'article_no', text: '글번호' },
-        { value: 'title', text: '제목' },
-      ]"
-    />
-
-    <table>
+    <v-btn><RouterLink :to="{ name: 'article-write' }">글쓰기</RouterLink></v-btn>
+    <v-table>
+    <thead>
       <tr>
-        <th>글 번호</th>
-        <th>글 제목</th>
-        <th>내용</th>
-        <th>글 종류</th>
-        <th>작성자</th>
+        <th class="text-center">
+          번호
+        </th>
+        <th class="text-center">
+          제목
+        </th>
+        <th class="text-center">
+          작성자
+        </th>
+        <th class="text-center">
+          날짜
+        </th>
       </tr>
+    </thead>
+    <tbody>
       <tr
-        class="article-item"
         v-for="article in articles"
         :key="article.articleNo"
         @click="moveDetail(article.articleNo)"
       >
-        <td>{{ article.articleNo }}</td>
+      <td>{{ article.articleNo }}</td>
         <td>{{ article.title }}</td>
-        <td>{{ article.content }}</td>
-        <td>{{ article.type }}</td>
         <td>{{ article.author }}</td>
+        <td>{{ article.writeDate }}</td>
       </tr>
-    </table>
+    </tbody>
+  </v-table>
   </div>
 </template>
 
