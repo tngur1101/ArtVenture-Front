@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute,useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { ref, computed } from "vue";
 import { useBoardStore } from "@/stores/board";
 
@@ -18,9 +18,11 @@ const params = ref({
   pgno: 1, //조회할 페이지 번호
   spp: 20, //한번에 얻어올 게시글 개수
   type: route.params.type, //글의 타입
+  regionid: route.params.regionId,
 });
 
 boardStore.getArticles(params.value);
+console.log(params.value);
 
 const moveDetail = (articleNo) => {
   router.push({ name: "article-detail", params: { articleNo } });
@@ -44,20 +46,20 @@ const getSearchArticles = (searchKeyword) => {
 </script>
 
 <template>
-  <div style="margin-top: 5%;">
+  <div style="margin-top: 5%">
     <v-container class="fill-hegiht" fluid style="min-height: 434px">
       <v-fade-transition mode="out-in">
         <v-row>
           <v-col cols="13">
-          <v-card>
-            <v-img
-              src="https://picsum.photos/350/165?random"
-              height="300"
-              cover
-              class="bg-grey-lighten-2"
-            ></v-img>
-          </v-card>
-        </v-col>
+            <v-card>
+              <v-img
+                src="https://picsum.photos/350/165?random"
+                height="300"
+                cover
+                class="bg-grey-lighten-2"
+              ></v-img>
+            </v-card>
+          </v-col>
         </v-row>
       </v-fade-transition>
     </v-container>

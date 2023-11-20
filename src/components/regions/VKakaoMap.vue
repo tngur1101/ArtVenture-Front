@@ -120,7 +120,8 @@ const deleteMarkers = () => {
 
 <style>
 #map {
-  width: 100%;
+  /* margin-top: 5%; */
+  width: 70%;
   height: 700px;
 }
 </style>

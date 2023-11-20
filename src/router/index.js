@@ -7,7 +7,6 @@ import BoardDetail from "@/views/BoardView/BoardDetail.vue";
 import BoardModify from "@/views/BoardView/BoardModify.vue";
 import UserRegist from "@/components/users/UserRegist.vue";
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -32,8 +31,8 @@ const router = createRouter({
           component: () => import("@/components/users/UserLogin.vue"),
         },
         {
-          path:"/regist",
-          name:"user-regist",
+          path: "/regist",
+          name: "user-regist",
           component: UserRegist,
         },
       ],
@@ -47,21 +46,28 @@ const router = createRouter({
         //BoardList without type
         {
           path: "list",
-          name:"whole-article-list",
+          name: "whole-article-list",
           component: BoardList,
         },
 
         //BoardList with type
         {
           path: "list/:type",
-          name:"article-list",
+          name: "article-list",
+          component: BoardList,
+        },
+
+        // BoardList with type, regionid
+        {
+          path: "list/:type/:regionId",
+          name: "article-list-region",
           component: BoardList,
         },
 
         //BoardDetail
         {
           name: "article-detail",
-          path:"detail/:articleNo",
+          path: "detail/:articleNo",
           component: BoardDetail,
         },
 
@@ -70,7 +76,7 @@ const router = createRouter({
           name: "article-write",
           path: "write",
           component: BoardWrite,
-          meta: {requiresAuth: true}, //인증(로그인)필요
+          meta: { requiresAuth: true }, //인증(로그인)필요
         },
 
         //BoardModify
@@ -78,7 +84,7 @@ const router = createRouter({
           name: "article-modify",
           path: "modify/:articleNo",
           component: BoardModify,
-          meta: {requiresAuth: true},
+          meta: { requiresAuth: true },
           //관리자 권한 또한 필요한 경우
           //meta: {requiresAuth: true, requiresAdmin: true}
         },

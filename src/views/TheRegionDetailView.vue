@@ -3,7 +3,7 @@ import { onMounted, ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import { detailRegion } from "@/api/region";
 import VKakaoMap from "@/components/regions/VKakaoMap.vue";
-import { mapActions } from "pinia";
+import RegionBoard from "../components/regions/RegionBoard.vue";
 
 const route = useRoute();
 const { regionId } = route.params;
@@ -49,7 +49,10 @@ const clickPlace = (nowPlace) => {
 
 <template>
   <div>{{ route.params.regionId }}번 지역 이동</div>
-  <VKakaoMap :places="places" :selectPlace="selectPlace" />
+  <div class="map-container">
+    <VKakaoMap :places="places" :selectPlace="selectPlace" />
+    <RegionBoard :regionId="regionId" :regionName="지역이름" class="board" />
+  </div>
   <div>
     <h3>달성 업적</h3>
     <v-container>
@@ -97,5 +100,17 @@ const clickPlace = (nowPlace) => {
   filter: grayscale(50%);
   background-color: lightgray;
   /* background-color: rgb(200, 200, 200); */
+}
+
+.map-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.board {
+  width: 30%;
 }
 </style>
