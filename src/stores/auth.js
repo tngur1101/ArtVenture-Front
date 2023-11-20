@@ -39,11 +39,14 @@ export const useAuthStore = defineStore(
       token.value = "";
     };
 
-    const registUser = async (user) => {
-      //user등록 api 받는 코드 첨가
-    }
+    const regist = async (registForm) => {
+      //user등록 api 받는 코드 추가
+      console.log("회원가입 할 유저 : ", registForm);
+      const url = "http://localhost:80";
+      await axios.post(`${url}/member`, registForm);
+    };
 
-    return { user, token, login, logout, clearUser };
+    return { user, token, login, logout, clearUser, regist };
   },
 
   //새로고침시 데이터 유지를 위한 설정(localStorage에 저장해서 불러오는 방식)
