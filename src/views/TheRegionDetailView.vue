@@ -50,8 +50,13 @@ const clickPlace = (nowPlace) => {
 <template>
   <div>{{ route.params.regionId }}번 지역 이동</div>
   <div class="map-container">
-    <VKakaoMap :places="places" :selectPlace="selectPlace" />
-    <RegionBoard :regionId="regionId" :regionName="지역이름" class="board" />
+    <VKakaoMap
+      v-if="places.length > 0"
+      :places="places"
+      :selectPlace="selectPlace"
+      :completePlaces="region.completeList"
+    />
+    <RegionBoard :regionId="regionId" class="board" />
   </div>
   <div>
     <h3>달성 업적</h3>
