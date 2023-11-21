@@ -11,11 +11,13 @@ export const useAuthStore = defineStore(
       id: "",
       nickname: "",
       admin: "",
+      joindate: "",
+      // completeList: [],
     });
     const token = ref(""); //jwt 토큰 정보
 
+    const url = "http://localhost:80";
     const login = async (loginForm) => {
-      const url = "http://localhost:80";
       const { data } = await axios.post(`${url}/member/login`, loginForm);
       // console.log("로그인 요청 후 응답 데이터:", data);
 
@@ -25,7 +27,10 @@ export const useAuthStore = defineStore(
       console.log("디코딩된 토큰 정보 :", decoded);
       user.value.id = decoded.id;
       user.value.nickname = decoded.nickname;
+      user.value.name = decoded.name;
+      user.value.joindate = decoded.joindate;
       user.value.admin = decoded.admin;
+      // user.value.completeList = decoded.completeList;
     };
 
     const logout = () => {
@@ -36,17 +41,25 @@ export const useAuthStore = defineStore(
       user.value.id = "";
       user.value.nickname = "";
       user.value.admin = "";
+      user.value.name = "";
+      user.value.joindate = "";
       token.value = "";
     };
 
     const regist = async (registForm) => {
       //user등록 api 받는 코드 추가
       console.log("회원가입 할 유저 : ", registForm);
-      const url = "http://localhost:80";
       await axios.post(`${url}/member`, registForm);
     };
 
-    return { user, token, login, logout, clearUser, regist };
+    const update = async (updateForm) => {
+      console.log("갱신할 정보 : ", updateForm);
+      await axios.put(`${url}/member`, updateForm);
+      // const updateUser = await axios.get(`url` / member, user.value.id);
+      // console.log(updateUser);
+    };
+
+    return { user, token, login, logout, clearUser, regist, update };
   },
 
   //새로고침시 데이터 유지를 위한 설정(localStorage에 저장해서 불러오는 방식)

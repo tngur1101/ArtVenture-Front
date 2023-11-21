@@ -3,12 +3,15 @@ import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useMenuStore } from "../../stores/menu";
 import { useAuthStore } from "../../stores/auth";
+import { useModalStore } from "../../stores/modal";
 
 const router = useRouter();
 const menuStore = useMenuStore();
 const authStore = useAuthStore();
+const modalStore = useModalStore();
 const { menuList } = storeToRefs(menuStore);
 const { changeMenuState } = menuStore;
+const { openModal } = modalStore;
 
 const logout = () => {
   console.log("logout!!!!!");
@@ -24,9 +27,10 @@ const moveMain = () => {
   router.push({ name: "main" });
 };
 
-const moveMyPage = () => {
-  // console.log("move mypage");
-  router.push({ name: "my-page" });
+const openDialog = () => {
+  console.log("open modal");
+  openModal();
+  // router.push({ name: "my-page" });
 };
 </script>
 
@@ -39,7 +43,7 @@ const moveMyPage = () => {
     <template v-for="menu in menuList" :key="menu.routeName">
       <template v-if="menu.show">
         <template v-if="menu.routeName === 'user-logout'">
-          <v-avatar color="info" class="profile" @click="moveMyPage"
+          <v-avatar color="info" class="profile" @click="openDialog"
             ><span class="text-h5">KYJ</span></v-avatar
           >
           <v-btn
