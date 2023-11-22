@@ -19,10 +19,15 @@ export const useModalStore = defineStore("modal", () => {
     articleList.value = data.articles;
   };
 
+  const closeModal = () => {
+    isOpenModal.value = false;
+  };
+
   return {
     isOpenModal,
     openModal,
     completeList,
     articleList,
+    closeModal,
   };
 });

@@ -1,14 +1,19 @@
-import axios from "./MainAxios";
-const { VITE_VUE_API_URL } = import.meta.env;
+// import { useAuthStore } from "../stores/auth";
+// import axios from "./MainAxios";
 
-function localAxios() {
-  const instance = axios.create({
-    baseURL: VITE_VUE_API_URL,
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-  });
-  return instance;
-}
+// const { VITE_VUE_API_URL } = import.meta.env;
 
-export { localAxios };
+// function localAxios() {
+//   const authStore = useAuthStore();
+//   const { token } = authStore();
+//   const instance = axios.create({
+//     baseURL: VITE_VUE_API_URL,
+//     headers: {
+//       "Content-Type": "application/json;charset=utf-8",
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
+//   return instance;
+// }
+
+// export { localAxios };

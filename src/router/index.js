@@ -6,6 +6,7 @@ import BoardWrite from "@/views/BoardView/BoardWrite.vue";
 import BoardDetail from "@/views/BoardView/BoardDetail.vue";
 import BoardModify from "@/views/BoardView/BoardModify.vue";
 import UserRegist from "@/components/users/UserRegist.vue";
+import { useAuthStore } from "../stores/auth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -96,6 +97,27 @@ const router = createRouter({
       ],
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+  const { checkAuth } = authStore;
+
+  if (to.meta.requiresAuth) {
+    // 여기에서 인증 여부 확인 로직을 추가합니다.
+    const isAuthenticated = checkAuth(); // 인증 확인하는 함수 (예시)
+
+    if (!isAuthenticated) {
+      // 인증되지 않았을 경우 로그인 페이지로 리다이렉트
+      next({ name: "user-login", query: { redirect: to.fullPath } });
+    } else {
+      // 인증되었을 경우 요청을 계속 진행
+      next();
+    }
+  } else {
+    // 인증이 필요하지 않은 페이지는 그냥 진행
+    next();
+  }
 });
 
 export default router;

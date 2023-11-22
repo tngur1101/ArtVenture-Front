@@ -1,14 +1,12 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { localAxios } from "@/utils/http-commons";
 import { useRegionStore } from "../../stores/region";
-
+import instance from "../../utils/MainAxios";
 const regionStore = useRegionStore();
-const axios = localAxios();
+const axios = instance;
 const router = useRouter();
-// const notiArticles = ref([]);
-// const tendArticles = ref([]);
+
 const regionArticles = ref([]);
 const props = defineProps({ regionId: Number, regionName: String });
 
