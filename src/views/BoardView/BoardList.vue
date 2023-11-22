@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute,useRouter } from "vue-router";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useBoardStore } from "@/stores/board";
 
 const boardStore = useBoardStore();
@@ -19,6 +19,12 @@ const params = ref({
   spp: 20, //한번에 얻어올 게시글 개수
   type: route.params.type, //글의 타입
 });
+
+watch (()=>route.params.type,(newType)=>{
+  params.value.type=newType;
+  boardStore.getArticles(params.value);
+  console.log("타입 변경");
+})
 
 boardStore.getArticles(params.value);
 
@@ -67,7 +73,12 @@ const searchInfo = ref({
         </v-row>
       </v-fade-transition>
     </v-container>
-    <v-btn><RouterLink :to="{ name: 'article-write' }">글쓰기</RouterLink></v-btn>
+    <div class="board-title-container">
+      <div class="board-title">게시판 목록</div>
+      <v-btn class="write-btn"><RouterLink :to="{ name: 'article-write' }">글쓰기</RouterLink></v-btn>
+    </div>
+    <div class="card-container">
+    <v-card class="vcard">
     <v-table>
     <thead>
       <tr>
@@ -94,10 +105,12 @@ const searchInfo = ref({
       <td>{{ article.articleNo }}</td>
         <td>{{ article.title }}</td>
         <td>{{ article.author }}</td>
-        <td>{{ article.writeDate }}</td>
+        <td>{{ article.updateDate }}</td>
       </tr>
     </tbody>
   </v-table>
+</v-card>
+</div>
   </div>
 </template>
 
@@ -105,4 +118,38 @@ const searchInfo = ref({
 .article-item:hover {
   background-color: aquamarine;
 }
+td{
+  text-align: center;
+}
+
+.vcard{
+  width: 70%;
+}
+
+.card-container{
+  display: flex;
+  justify-content: center;
+}
+
+.board-title-container{
+  margin: 0 auto;
+  width: 70%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  margin-bottom: 2rem;
+  /* margin-left: 15%; */
+}
+
+.write-btn{
+  position: absolute;
+  right: 0;
+  /* margin-left: 15%;s */
+}
+
+.board-title{
+  justify-content: center;
+}
+
 </style>

@@ -8,13 +8,21 @@ const authStore = useAuthStore();
 const boardStore = useBoardStore();
 const router = useRouter();
 
-const boardForm = ref(null);
+const writeForm = ref({
+  author: authStore.user.nickname,
+  title: "",
+  content: "",
+  fileInfo: "",
+});
 
 //등록 요청 보내고 등록 성공 시 목록 페이지 이동
 const write = async () => {
   try {
-    const imageData = new FormData(boardForm.value);
+    const imageData = new FormData();
+    imageData.append("title", writeForm.value.title);
     imageData.append("author", authStore.user.nickname);
+    imageData.append("content", writeForm.value.content);
+    imageData.append("file", writeForm.value.fileInfo);
 
     if (!confirm("이대로 등록하시겠습니까?")) return;
     // console.log(writeForm.value.fileInfo);
@@ -24,6 +32,7 @@ const write = async () => {
     }
     // await boardStore.writeArticle(writeForm.value);
     await boardStore.writeArticle(imageData);
+    console.log(writeForm.value);
 
     router.push({ path: "/board/list" });
     alert("등록 성공");
@@ -44,11 +53,11 @@ const moveList = () => {
   <div style="margin-top: 7%" class="write-page">
     <v-card variant="outlined" class="write-container" elevation="8" rounded="lg">
       <div class="aaa">글 작성</div>
-      <form ref="boardForm">
+      <form method="post" enctype="multipart/form-data">
         <div class="title-container">
           <div class="title">제목</div>
           <div class="title-content">
-            <v-text-field density="compact" placeholder="제목을 입력해주세요" name="title"></v-text-field>
+            <v-text-field density="compact" placeholder="제목을 입력해주세요" v-model="writeForm.title"></v-text-field>
           </div>
         </div>
         <v-divider :thickness="8" class="divider"></v-divider>
@@ -61,13 +70,13 @@ const moveList = () => {
                 clear-icon="mdi-close-circle"
                 label="Text"
                 model-value="내용을 입력해주세요"
-                name="content"
+                v-model="writeForm.content"
               ></v-textarea>
             </v-container>
           </div>
         </div>
         <div class="img-container">
-          <v-file-input multiple label="이미지 넣기" name="files"></v-file-input>
+          <v-file-input multiple label="이미지 넣기" v-model="writeForm.fileInfo"></v-file-input>
         </div>
         <div class="btn-container">
           <v-btn class="regist-btn" @click="write">등록</v-btn>
