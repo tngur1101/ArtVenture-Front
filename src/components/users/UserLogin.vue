@@ -32,21 +32,6 @@ const moveSignup = () => {
 </script>
 
 <template>
-  <!-- <div>
-    <h1>로그인</h1>
-    <form @submit.prevent="login">
-      <fieldset>
-        <label><input type="text" v-model="loginForm.id" /> 아이디</label>
-        <br />
-        <label
-          ><input type="password" v-model="loginForm.password" />
-          비밀번호</label
-        >
-        <br />
-        <button>로그인</button>
-      </fieldset>
-    </form>
-  </div> -->
   <div style="margin-top: 8%">
     <form @submit.prevent="login">
       <v-card

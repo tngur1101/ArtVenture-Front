@@ -1,43 +1,42 @@
 <script setup>
+import { storeToRefs } from "pinia";
 import { ref } from "vue";
-
+import UserMyPageInfo from "./UserMyPageInfo.vue";
+import UserMyPageComplete from "./UserMyPageComplete.vue";
+import UserMyPageArticle from "./UserMyPageArticle.vue";
+import { useModalStore } from "@/stores/modal";
 const tab = ref({});
+const modalStore = useModalStore();
+const { isOpenModal } = storeToRefs(modalStore);
 </script>
 
-<!-- <template>
-  <div class="mypage-container">
-    <div><h1>프로필</h1></div>
-    <div><h1>내가 달성한 업적</h1></div>
-    <div><h1>내가 쓴 글</h1></div>
-  </div>
-</template> -->
 <template>
-  <v-card class="margin">
-    <v-tabs v-model="tab" color="deep-purple-accent-4" align-tabs="center">
-      <v-tab :value="1">나의 정보</v-tab>
-      <v-tab :value="2">달성 업적</v-tab>
-      <v-tab :value="3">작성한 글</v-tab>
-    </v-tabs>
-    <v-window v-model="tab">
-      <v-window-item v-for="n in 3" :key="n" :value="n">
-        <v-container fluid>
-          <v-row>
-            <v-col v-for="i in 6" :key="i" cols="12" md="4">
-              <v-img
-                :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
-                :lazy-src="`https://picsum.photos/10/6?image=${i * n * 5 + 10}`"
-                aspect-ratio="1"
-              ></v-img>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-window-item>
-    </v-window>
-  </v-card>
+  <v-dialog v-model="isOpenModal" width="800">
+    <v-card :class="['elevation-4', 'rounded-xl', 'modal-card']">
+      <v-tabs v-model="tab" color="deep-purple-accent-4" align-tabs="center">
+        <v-tab :value="info">나의 정보</v-tab>
+        <v-tab :value="complete">달성 업적</v-tab>
+        <v-tab :value="article">작성한 글</v-tab>
+      </v-tabs>
+      <v-window v-model="tab" scrollable :class="['scrollable-tabs']">
+        <user-my-page-info />
+        <user-my-page-complete />
+        <user-my-page-article />
+      </v-window>
+    </v-card>
+  </v-dialog>
 </template>
-
 <style scoped>
-.margin {
-  margin-top: 10%;
+.modal-card {
+  min-width: 800px;
+  height: 600px;
+}
+
+.scrollable-tabs {
+  overflow-x: auto;
+  overflow-y: auto;
+  white-space: nowrap;
+  max-width: 100%;
+  height: 90%;
 }
 </style>

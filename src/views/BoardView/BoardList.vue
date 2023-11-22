@@ -2,6 +2,7 @@
 import { useRoute, useRouter } from "vue-router";
 import { ref, computed } from "vue";
 import { useBoardStore } from "@/stores/board";
+import VPagenation from "../../components/layout/VPagenation.vue";
 
 const boardStore = useBoardStore();
 console.log("boardStore: ", boardStore);
@@ -96,6 +97,11 @@ const getSearchArticles = (searchKeyword) => {
         <td>{{ article.author }}</td>
       </tr>
     </table>
+    <v-pagenation
+      :total-page="totalPageCount"
+      :total-visible="5"
+      @click-page="(pgNum) => changePage(pgNum)"
+    />
   </div>
 </template>
 
