@@ -1,8 +1,17 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { useModalStore } from "../../stores/modal";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const modalStore = useModalStore();
 const { articleList } = storeToRefs(modalStore);
+const { closeModal } = modalStore;
+
+const clickItem = (number) => {
+  console.log(number);
+  closeModal();
+  router.push({ name: "article-detail", params: { articleNo: number } });
+};
 </script>
 
 <template>
@@ -16,6 +25,7 @@ const { articleList } = storeToRefs(modalStore);
           :value="article.articleNo"
           color="primary"
           variant="plain"
+          @click="clickItem(article.articleNo)"
         >
           <v-container>
             <v-row>
