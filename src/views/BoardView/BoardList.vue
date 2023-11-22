@@ -2,7 +2,8 @@
 import { useRoute, useRouter } from "vue-router";
 import { ref, computed } from "vue";
 import { useBoardStore } from "@/stores/board";
-import VPagenation from "../../components/layout/VPagenation.vue";
+import VPagination from "../../components/layout/VPagination.vue";
+import VSearchBar from "../../components/layout/VSearchBar.vue";
 
 const boardStore = useBoardStore();
 console.log("boardStore: ", boardStore);
@@ -22,6 +23,13 @@ const params = ref({
   regionid: route.params.regionId,
 });
 
+const selectTitle = "검색조건";
+const selectOptions = ref([
+  { value: "", text: "전체글" },
+  { value: "title", text: "제목" },
+  { value: "author", text: "작성자" },
+]);
+
 boardStore.getArticles(params.value);
 console.log(params.value);
 
@@ -36,10 +44,10 @@ const changePage = async (pageNum) => {
   articles.value[0] = {};
 };
 
-const getSearchArticles = (searchKeyword) => {
-  console.log("BoardList의 조건 검색 메소드 호출: ", searchKeyword);
-  params.value.key = searchKeyword.key;
-  params.value.word = searchKeyword.word;
+const getSearchArticles = (key, word) => {
+  console.log("key : ", key, " word : ", word);
+  params.value.key = key;
+  params.value.word = word;
   params.value.pgno = 1;
 
   boardStore.getArticles(params.value);
@@ -67,13 +75,10 @@ const getSearchArticles = (searchKeyword) => {
     <h1>게시판 목록</h1>
     <RouterLink :to="{ name: 'article-write' }">글쓰기</RouterLink>
 
-    <SearchBar
-      @search-event="getSearchArticles"
-      :options="[
-        { value: 'user_id', text: '작성자' },
-        { value: 'article_no', text: '글번호' },
-        { value: 'title', text: '제목' },
-      ]"
+    <v-search-bar
+      @search-keyword="getSearchArticles"
+      :title="selectTitle"
+      :options="selectOptions"
     />
 
     <table>
@@ -97,7 +102,7 @@ const getSearchArticles = (searchKeyword) => {
         <td>{{ article.author }}</td>
       </tr>
     </table>
-    <v-pagenation
+    <v-pagination
       :total-page="totalPageCount"
       :total-visible="5"
       @click-page="(pgNum) => changePage(pgNum)"
