@@ -51,6 +51,10 @@ const moveNoti = () => {
 const moveTend = () => {
   router.push({ name: "article-list", params: { type: "3" } });
 };
+
+const moveDetail = (articleNo) => {
+  router.push({ name: "article-detail", params: { articleNo } });
+};
 </script>
 
 <template>
@@ -62,7 +66,12 @@ const moveTend = () => {
         </div>
         <div class="list-content">
           <v-list lines="one" class="list-background">
-            <v-list-item v-for="notiArticle in notiArticles" :key="notiArticle.articleNo" class="item-content">
+            <v-list-item
+              v-for="notiArticle in notiArticles"
+              :key="notiArticle.articleNo"
+              class="item-content"
+              @click="moveDetail(notiArticle.articleNo)"
+            >
               <!-- <v-card class="item-content"> -->
               {{ notiArticle.title }}
               <!-- </v-card> -->
@@ -77,7 +86,12 @@ const moveTend = () => {
           <v-list-item-title>건의글</v-list-item-title>
         </div>
         <v-list lines="one" class="list-background2">
-          <v-list-item v-for="tendArticle in tendArticles" :key="tendArticle.articleNo" class="item-content">
+          <v-list-item
+            v-for="tendArticle in tendArticles"
+            :key="tendArticle.articleNo"
+            class="item-content"
+            @click="moveDetail(tendArticle.articleNo)"
+          >
             <!-- <v-card class="item-content"> -->
             {{ tendArticle.title }}
             <!-- </v-card> -->
