@@ -1,11 +1,12 @@
 <script setup>
-import { ref, watch, onMounted, onBeforeUpdate } from "vue";
+import { ref, watch, onMounted } from "vue";
 
 const container = ref(null);
 const map = ref(null);
 const positions = ref([]);
 const markers = ref([]);
 const lines = ref([]);
+const lines2 = ref([]);
 
 const props = defineProps({
   places: Array,
@@ -122,6 +123,7 @@ const drawLines = () => {
   console.log("drawLines() 실행!!!");
   console.log("completes : ", props.completePlaces);
   lines.value = [];
+  lines2.value = [];
 
   for (let i = 0; i < props.completePlaces.length; i++) {
     // console.log(props.completePlaces[i]);
@@ -129,6 +131,9 @@ const drawLines = () => {
     lines.value.push(
       new kakao.maps.LatLng(complete.latitude, complete.longitude)
     );
+    // lines2.value.push(
+    //   new kakao.maps.LatLng(complete.latitude, complete.longitude + 0.3)
+    // );
   }
 
   // console.log("lines.value : ", lines.value);
@@ -140,8 +145,17 @@ const drawLines = () => {
     strokeStyle: "solid", // 선의 스타일입니다
   });
 
+  // var polyline2 = new kakao.maps.Polyline({
+  //   path: lines2.value, // 선을 구성하는 좌표배열 입니다
+  //   strokeWeight: 5, // 선의 두께 입니다
+  //   strokeColor: "#000000", // 선의 색깔입니다
+  //   strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+  //   strokeStyle: "solid", // 선의 스타일입니다
+  // });
+
   // 지도에 선을 표시합니다
   polyline.setMap(map.value);
+  // polyline2.setMap(map.value);
 };
 </script>
 

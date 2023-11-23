@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useAuthStore } from "../stores/auth";
+import { useMenuStore } from "../stores/menu";
 import router from "../router";
 const { VITE_VUE_API_URL } = import.meta.env;
 
@@ -35,8 +36,10 @@ instance.interceptors.response.use(
     ) {
       //store의 유저정보 clear
       const authStore = useAuthStore();
-      authStore.clearUser();
+      const menuStore = useMenuStore();
 
+      authStore.clearUser();
+      menuStore.changeMenuState();
       //로그인 페이지 이동 및 alert
       router.push({ name: "user-login" });
       alert("인증이 만료되었습니다. 다시 로그인 해주세요.");
