@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute,useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { ref, computed, watch } from "vue";
 import { useBoardStore } from "@/stores/board";
 import VPagination from "../../components/layout/VPagination.vue";
@@ -23,19 +23,22 @@ const params = ref({
   regionid: route.params.regionId,
 });
 
+console.log(params);
 
-watch (()=>route.params.type,(newType)=>{
-  params.value.type=newType;
-  boardStore.getArticles(params.value);
-  console.log("타입 변경");
-})
+watch(
+  () => route.params.type,
+  (newType) => {
+    params.value.type = newType;
+    boardStore.getArticles(params.value);
+    console.log("타입 변경");
+  }
+);
 const selectTitle = "검색조건";
 const selectOptions = ref([
   { value: "", text: "전체글" },
   { value: "title", text: "제목" },
   { value: "author", text: "작성자" },
 ]);
-
 
 boardStore.getArticles(params.value);
 console.log(params.value);
@@ -61,10 +64,9 @@ const getSearchArticles = (key, word) => {
 };
 
 const searchInfo = ref({
-  key:"",
-  word:"",
+  key: "",
+  word: "",
 });
-
 </script>
 
 <template>
@@ -73,66 +75,41 @@ const searchInfo = ref({
       <v-fade-transition mode="out-in">
         <v-row>
           <v-col cols="13">
-          <v-card>
-            <v-img
-              src="https://picsum.photos/350/165?random"
-              height="400"
-              cover
-              class="bg-grey-lighten-2"
-            ></v-img>
-          </v-card>
-        </v-col>
+            <v-card>
+              <v-img src="https://picsum.photos/350/165?random" height="400" cover class="bg-grey-lighten-2"></v-img>
+            </v-card>
+          </v-col>
         </v-row>
       </v-fade-transition>
     </v-container>
     <div class="board-title-container">
       <div class="board-title">게시판 목록</div>
       <v-btn class="write-btn"><RouterLink :to="{ name: 'article-write' }">글쓰기</RouterLink></v-btn>
-      <v-search-bar
-      @search-keyword="getSearchArticles"
-      :title="selectTitle"
-      :options="selectOptions"
-    />
+      <v-search-bar @search-keyword="getSearchArticles" :title="selectTitle" :options="selectOptions" />
     </div>
     <div class="card-container">
-    <v-card class="vcard">
-    <v-table>
-    <thead>
-      <tr>
-        <th class="text-center">
-          번호
-        </th>
-        <th class="text-center">
-          제목
-        </th>
-        <th class="text-center">
-          작성자
-        </th>
-        <th class="text-center">
-          날짜
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="article in articles"
-        :key="article.articleNo"
-        @click="moveDetail(article.articleNo)"
-      >
-      <td>{{ article.articleNo }}</td>
-        <td>{{ article.title }}</td>
-        <td>{{ article.author }}</td>
-        <td>{{ article.updateDate }}</td>
-      </tr>
-    </tbody>
-  </v-table>
-  <v-pagination
-      :total-page="totalPageCount"
-      :total-visible="5"
-      @click-page="(pgNum) => changePage(pgNum)"
-    />
-</v-card>
-</div>
+      <v-card class="vcard">
+        <v-table>
+          <thead>
+            <tr>
+              <th class="text-center">번호</th>
+              <th class="text-center">제목</th>
+              <th class="text-center">작성자</th>
+              <th class="text-center">날짜</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="article in articles" :key="article.articleNo" @click="moveDetail(article.articleNo)">
+              <td>{{ article.articleNo }}</td>
+              <td>{{ article.title }}</td>
+              <td>{{ article.author }}</td>
+              <td>{{ article.updateDate }}</td>
+            </tr>
+          </tbody>
+        </v-table>
+        <v-pagination :total-page="totalPageCount" :total-visible="5" @click-page="(pgNum) => changePage(pgNum)" />
+      </v-card>
+    </div>
   </div>
 </template>
 
@@ -140,38 +117,37 @@ const searchInfo = ref({
 .article-item:hover {
   background-color: aquamarine;
 }
-td{
+td {
   text-align: center;
 }
 
-.vcard{
+.vcard {
   width: 70%;
 }
 
-.card-container{
+.card-container {
   display: flex;
   justify-content: center;
 }
 
-.board-title-container{
+.board-title-container {
   margin: 0 auto;
   width: 70%;
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content:center;
+  justify-content: center;
   margin-bottom: 2rem;
   /* margin-left: 15%; */
 }
 
-.write-btn{
+.write-btn {
   position: absolute;
   right: 0;
   /* margin-left: 15%;s */
 }
 
-.board-title{
+.board-title {
   justify-content: center;
 }
-
 </style>

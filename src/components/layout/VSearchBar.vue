@@ -29,7 +29,7 @@ const search = () => {
       hide-details
       v-model="word"
       @click:append-inner="$emit('searchKeyword', key, word)"
-      :class="['v-col-4', 'pa-0']"
+      :class="['v-col-10', 'pa-0']"
     ></v-text-field>
   </div>
 </template>

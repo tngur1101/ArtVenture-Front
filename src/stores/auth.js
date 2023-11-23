@@ -62,7 +62,7 @@ export const useAuthStore = defineStore(
     const checkAuth = () => {
       console.log("로그인 확인 checkAuth() 호출");
       // 현재 store에 토큰이 없으면 바로 로그인 화면
-      if (token === "") return false;
+      if (token != "") return true;
     };
 
     return { user, token, login, logout, clearUser, regist, update, checkAuth };
