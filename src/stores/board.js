@@ -31,9 +31,16 @@ export const useBoardStore = defineStore("board", () => {
   };
 
   /*==========등록========================= */
+  const writeConfig = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      // dataType: "json",
+      // 'Content-Type': false,
+    },
+  };
   const writeArticle = async (article) => {
     console.log("registArticle() 요청, 등록데이터 : ", article);
-    return await local.post(`/board`, article);
+    return await local.post(`/board`, article, writeConfig);
   };
 
   /*========================삭제====================== */
