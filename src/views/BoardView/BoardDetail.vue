@@ -8,7 +8,7 @@ const boardStore = useBoardStore();
 const authStore = useAuthStore();
 const { user } = authStore;
 const article = computed(() => {
-  // console.log(boardStore.article);
+  console.log(boardStore.article);
   checkAuthor();
   return boardStore.article;
 }); //store 데이터를 반응형으로 가져오기

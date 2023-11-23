@@ -25,13 +25,13 @@ const onRegionClick = () => {
       <v-img
         class="align-end text-white"
         height="150"
-        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+        :src="props.regionObj.imageUrl"
         cover
       >
         <v-card-title>{{ props.regionObj.name }}</v-card-title>
       </v-img>
       <v-card-subtitle class="pt-4">
-        {{ props.regionObj.sidoId }}
+        {{ props.regionObj.name }}
       </v-card-subtitle>
     </v-card>
   </div>

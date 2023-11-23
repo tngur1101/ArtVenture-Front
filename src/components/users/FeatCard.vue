@@ -9,8 +9,8 @@ const props = defineProps({ cardObj: Object });
 <template>
   <v-card class="mx-auto">
     <v-img
-      class="align-end text-white"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      class="align-end text-white image"
+      :src="props.cardObj.imageUrl"
       cover
     >
       <v-card-title>{{ props.cardObj.name }}</v-card-title>
@@ -31,5 +31,9 @@ const props = defineProps({ cardObj: Object });
   margin: 0 10px;
   border-radius: 5%;
   border: 1px solid lightgray;
+}
+.image {
+  height: 150px;
+  width: 100%;
 }
 </style>
