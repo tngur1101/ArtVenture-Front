@@ -5,7 +5,7 @@ import instance from "../utils/MainAxios";
 
 function detailRegion(regionId, success, fail) {
   const authStore = useAuthStore();
-  console.log("지역 정보 요청 : ", regionId);
+  // console.log("지역 정보 요청 : ", regionId);
   instance
     .post(`/region/${regionId}`, { userId: authStore.user.id })
     .then(success)
@@ -13,7 +13,7 @@ function detailRegion(regionId, success, fail) {
 }
 
 function getSidoList(success, fail) {
-  console.log("지역 리스트 요청");
+  // console.log("지역 리스트 요청");
   instance.get(`/region`).then(success).catch(fail);
 }
 export { detailRegion, getSidoList };

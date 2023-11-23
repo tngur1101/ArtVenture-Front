@@ -11,12 +11,10 @@ import { onMounted } from "vue";
 const regions = ref([]);
 
 onMounted(() => {
-  console.log("sidoList 얻어오자");
   getSidoList(
     ({ data }) => {
       regions.value = data;
       //   console.log("data : ", data);
-      console.log("region : ", regions.value);
     },
     (error) => {
       console.log(error);

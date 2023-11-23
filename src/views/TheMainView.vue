@@ -1,12 +1,6 @@
 <script setup>
-import { RouterView } from "vue-router";
-import TheUserView from "./TheUserView.vue";
 import TheRegionView from "./TheRegionView.vue";
 import MainBoardView from "./MainBoardView.vue";
-
-const data = () => {
-  model: null;
-};
 </script>
 
 <template>
@@ -36,7 +30,7 @@ const data = () => {
   <div>
     <TheRegionView></TheRegionView>
   </div>
-  <div style="margin-top: 3%;">
+  <div style="margin-top: 3%">
     <MainBoardView></MainBoardView>
   </div>
 </template>

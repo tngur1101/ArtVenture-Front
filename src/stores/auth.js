@@ -55,6 +55,7 @@ export const useAuthStore = defineStore(
     const update = async (updateForm) => {
       console.log("갱신할 정보 : ", updateForm);
       await axios.put(`${url}/member`, updateForm);
+      user.value.nickname = updateForm.nickname;
       // const updateUser = await axios.get(`url` / member, user.value.id);
       // console.log(updateUser);
     };

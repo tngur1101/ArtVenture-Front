@@ -12,8 +12,8 @@ const router = useRouter();
 const regionStore = useRegionStore();
 
 const onRegionClick = () => {
-  console.log("지역 클릭");
-  console.log(props.regionObj);
+  // console.log("지역 클릭");
+  // console.log(props.regionObj);
   regionStore.moveRegion(props.regionObj.name);
   router.push(`/region/${props.regionObj.sidoId}`);
 };
