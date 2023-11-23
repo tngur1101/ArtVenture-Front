@@ -14,10 +14,7 @@ const props = defineProps({ cardObj: Object });
       width="150"
       @click="$emit('clickCard')"
     >
-      <v-img
-        src="https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg"
-      >
-      </v-img>
+      <v-img :src="props.cardObj.imageUrl" class="image"> </v-img>
       <v-card-title class="text-center">{{ props.cardObj.name }}</v-card-title>
       <!-- <v-card-text>{{ props.complete.description }}</v-card-text> -->
     </v-card>
@@ -29,5 +26,9 @@ const props = defineProps({ cardObj: Object });
   margin: 0 10px;
   border-radius: 5%;
   border: 1px solid lightgray;
+}
+.image {
+  height: 100px;
+  width: 150px;
 }
 </style>
