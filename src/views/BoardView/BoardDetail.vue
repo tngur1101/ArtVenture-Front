@@ -52,7 +52,7 @@ const moveModify = (articleNo) => {
       </div>
       <v-divider :thickness="8" color="info" class="divider"></v-divider>
       <div class="detail-content">
-        <img v-for="item in article.imageUrl" :src="item" />
+        <img v-for="item in article.imageUrl" :src="item" class="centered-image" />
         <pre v-text="article.content"></pre>
       </div>
       <div class="btn-container">
@@ -117,5 +117,11 @@ const moveModify = (articleNo) => {
 
 .delete-btn {
   margin-left: 1%;
+}
+
+.centered-image {
+  width: 60%;
+  display: block; /* 가로 중앙 정렬을 위해 필요한 속성 */
+  margin: 0 auto; /* 가로 중앙 정렬을 위한 마진 설정 */
 }
 </style>
