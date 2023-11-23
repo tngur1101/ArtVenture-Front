@@ -68,7 +68,12 @@ const getSearchArticles = (key, word) => {
         <v-row>
           <v-col cols="13">
             <v-card>
-              <v-img src="https://picsum.photos/350/165?random" height="400" cover class="bg-grey-lighten-2"></v-img>
+              <v-img
+                src="https://img.freepik.com/free-photo/tourist-choosing-a-place-to-visit-on-map_23-2148232499.jpg?w=1380&t=st=1700744535~exp=1700745135~hmac=3f3724f9e48460e599a2d3739c068c99b8a8a7ea04616c5076f44331967586d3"
+                height="400"
+                cover
+                class="bg-grey-lighten-2"
+              ></v-img>
             </v-card>
           </v-col>
         </v-row>
@@ -77,12 +82,20 @@ const getSearchArticles = (key, word) => {
 
     <div class="search-background">
       <div class="search-bar-container">
-        <v-search-bar @search-keyword="getSearchArticles" :title="selectTitle" :options="selectOptions" />
+        <v-search-bar
+          @search-keyword="getSearchArticles"
+          :title="selectTitle"
+          :options="selectOptions"
+        />
       </div>
       <div class="board-title-container">
         <div class="board-title">게시판 목록</div>
         <div>
-          <v-btn class="write-btn"><RouterLink :to="{ name: 'article-write' }">글쓰기</RouterLink></v-btn>
+          <v-btn class="write-btn"
+            ><RouterLink :to="{ name: 'article-write' }"
+              >글쓰기</RouterLink
+            ></v-btn
+          >
         </div>
       </div>
     </div>
@@ -112,7 +125,11 @@ const getSearchArticles = (key, word) => {
             </tr>
           </tbody>
         </v-table>
-        <v-pagination :total-page="totalPageCount" :total-visible="5" @click-page="(pgNum) => changePage(pgNum)" />
+        <v-pagination
+          :total-page="totalPageCount"
+          :total-visible="5"
+          @click-page="(pgNum) => changePage(pgNum)"
+        />
       </v-card>
     </div>
   </div>

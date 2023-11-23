@@ -68,4 +68,7 @@ const openDialog = () => {
 .profile {
   cursor: pointer;
 }
+a {
+  color: black;
+}
 </style>

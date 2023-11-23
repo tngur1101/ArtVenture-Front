@@ -32,7 +32,7 @@ const getRegion = () => {
       region.value = data;
       // console.log("data : ", data);
       places.value = region.value.featList;
-      // console.log("places : ", places);
+      console.log("places : ", places);
       console.log("complete : ", region.value.completeList);
       console.log("notComplete : ", notComplete.value);
     },

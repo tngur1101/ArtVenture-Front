@@ -124,7 +124,7 @@ const moveList = () => {
 }
 
 .write-container {
-  width: 70%;
+  width: 60%;
 }
 
 .aaa {

@@ -61,12 +61,17 @@ function checkAuthor() {
       <v-divider :thickness="8" color="info" class="divider"></v-divider>
       <div class="detail-content">
         <template v-if="article.imageUrl && article.imageUrl.length > 0"
-          ><img v-for="item in article.imageUrl" :src="item" class="centered-image"
+          ><img
+            v-for="item in article.imageUrl"
+            :src="item"
+            class="centered-image"
         /></template>
         <pre v-text="article.content"></pre>
       </div>
       <div v-if="isAuthor" class="btn-container">
-        <v-btn class="modify-btn" @click="moveModify(article.articleNo)">수정</v-btn>
+        <v-btn class="modify-btn" @click="moveModify(article.articleNo)"
+          >수정</v-btn
+        >
         <v-btn class="delete-btn" @click="deleteArticle">삭제</v-btn>
       </div>
     </v-card>
