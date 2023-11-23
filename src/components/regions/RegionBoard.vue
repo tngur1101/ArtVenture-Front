@@ -55,9 +55,7 @@ const moveDetail = (articleNo) => {
     <div class="container">
       <v-card width="100%">
         <div class="list-title" @click="moveRegionBoard">
-          <v-list-item-title class="title"
-            >{{ regionStore.regionName }} 공략글</v-list-item-title
-          >
+          <v-list-item-title class="title">{{ regionStore.regionName }} 공략글</v-list-item-title>
         </div>
         <div class="list-content">
           <v-list lines="one">
@@ -92,7 +90,7 @@ const moveDetail = (articleNo) => {
 
 .container {
   width: 90%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   min-height: 400px;
 }
 

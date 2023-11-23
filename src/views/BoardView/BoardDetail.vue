@@ -52,7 +52,7 @@ function checkAuthor() {
 
   <!-- 맨 밑에 다음글 이전글과 리스트를 만들어줄 것인가? -->
   <div style="margin-top: 7%" class="detail-page">
-    <v-card variant="outlined" class="detail-container">
+    <v-card class="detail-container" elevation="8">
       <div class="detail-title">{{ article.title }}</div>
       <div class="author-date-container">
         <div class="detail-date">{{ article.updateDate }}</div>
@@ -61,17 +61,12 @@ function checkAuthor() {
       <v-divider :thickness="8" color="info" class="divider"></v-divider>
       <div class="detail-content">
         <template v-if="article.imageUrl && article.imageUrl.length > 0"
-          ><img
-            v-for="item in article.imageUrl"
-            :src="item"
-            class="centered-image"
+          ><img v-for="item in article.imageUrl" :src="item" class="centered-image"
         /></template>
         <pre v-text="article.content"></pre>
       </div>
       <div v-if="isAuthor" class="btn-container">
-        <v-btn class="modify-btn" @click="moveModify(article.articleNo)"
-          >수정</v-btn
-        >
+        <v-btn class="modify-btn" @click="moveModify(article.articleNo)">수정</v-btn>
         <v-btn class="delete-btn" @click="deleteArticle">삭제</v-btn>
       </div>
     </v-card>
@@ -83,6 +78,7 @@ function checkAuthor() {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5%;
 }
 
 .detail-container {
