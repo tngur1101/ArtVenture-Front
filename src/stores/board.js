@@ -1,10 +1,10 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
+import instance from "../utils/MainAxios";
 // import axios from "@/utils/boardAxios";
 // import axios from "axios";
-import { localAxios } from "../utils/http-commons";
 
-const local = localAxios();
+const local = instance;
 
 export const useBoardStore = defineStore("board", () => {
   /*==============목록 start================== */

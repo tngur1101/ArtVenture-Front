@@ -2,6 +2,8 @@
 import { useRoute,useRouter } from "vue-router";
 import { ref, computed, watch } from "vue";
 import { useBoardStore } from "@/stores/board";
+import VPagination from "../../components/layout/VPagination.vue";
+import VSearchBar from "../../components/layout/VSearchBar.vue";
 
 const boardStore = useBoardStore();
 console.log("boardStore: ", boardStore);
@@ -18,15 +20,25 @@ const params = ref({
   pgno: 1, //조회할 페이지 번호
   spp: 20, //한번에 얻어올 게시글 개수
   type: route.params.type, //글의 타입
+  regionid: route.params.regionId,
 });
+
 
 watch (()=>route.params.type,(newType)=>{
   params.value.type=newType;
   boardStore.getArticles(params.value);
   console.log("타입 변경");
 })
+const selectTitle = "검색조건";
+const selectOptions = ref([
+  { value: "", text: "전체글" },
+  { value: "title", text: "제목" },
+  { value: "author", text: "작성자" },
+]);
+
 
 boardStore.getArticles(params.value);
+console.log(params.value);
 
 const moveDetail = (articleNo) => {
   router.push({ name: "article-detail", params: { articleNo } });
@@ -39,10 +51,10 @@ const changePage = async (pageNum) => {
   articles.value[0] = {};
 };
 
-const getSearchArticles = (searchKeyword) => {
-  console.log("BoardList의 조건 검색 메소드 호출: ", searchKeyword);
-  params.value.key = searchKeyword.key;
-  params.value.word = searchKeyword.word;
+const getSearchArticles = (key, word) => {
+  console.log("key : ", key, " word : ", word);
+  params.value.key = key;
+  params.value.word = word;
   params.value.pgno = 1;
 
   boardStore.getArticles(params.value);
@@ -56,7 +68,7 @@ const searchInfo = ref({
 </script>
 
 <template>
-  <div style="margin-top: 5%;">
+  <div style="margin-top: 5%">
     <v-container class="fill-hegiht" fluid style="min-height: 434px">
       <v-fade-transition mode="out-in">
         <v-row>
@@ -76,6 +88,11 @@ const searchInfo = ref({
     <div class="board-title-container">
       <div class="board-title">게시판 목록</div>
       <v-btn class="write-btn"><RouterLink :to="{ name: 'article-write' }">글쓰기</RouterLink></v-btn>
+      <v-search-bar
+      @search-keyword="getSearchArticles"
+      :title="selectTitle"
+      :options="selectOptions"
+    />
     </div>
     <div class="card-container">
     <v-card class="vcard">
@@ -109,6 +126,11 @@ const searchInfo = ref({
       </tr>
     </tbody>
   </v-table>
+  <v-pagination
+      :total-page="totalPageCount"
+      :total-visible="5"
+      @click-page="(pgNum) => changePage(pgNum)"
+    />
 </v-card>
 </div>
   </div>

@@ -5,12 +5,16 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useRegionStore } from "../../stores/region";
+
 const props = defineProps({ regionObj: Object });
 const router = useRouter();
+const regionStore = useRegionStore();
 
 const onRegionClick = () => {
   console.log("지역 클릭");
   console.log(props.regionObj);
+  regionStore.moveRegion(props.regionObj.name);
   router.push(`/region/${props.regionObj.sidoId}`);
 };
 </script>
