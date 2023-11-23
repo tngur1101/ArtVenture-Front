@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useBoardStore } from "@/stores/board.js";
 import { useAuthStore } from "@/stores/auth.js";
@@ -10,11 +10,21 @@ const router = useRouter();
 
 const boardForm = ref(null);
 
+let selectedValue = ref("");
+
+const items = [
+  { title: "공지", value: 1 },
+  { title: "공략", value: 2 },
+  { title: "건의", value: 3 },
+];
+
 //등록 요청 보내고 등록 성공 시 목록 페이지 이동
 const write = async () => {
   try {
     const imageData = new FormData(boardForm.value);
+    console.log("form !!!!!!!!!!", imageData);
     imageData.append("author", authStore.user.nickname);
+    imageData.append("type", selectedValue.value.value);
 
     if (!confirm("이대로 등록하시겠습니까?")) return;
     // console.log(writeForm.value.fileInfo);
@@ -34,6 +44,10 @@ const write = async () => {
   }
 };
 
+// watch(selectedValue, (newValue, oldValue) => {
+//   console.log("Selected Value changed:", newValue);
+// });
+
 //취소 버튼을 누르면 list로 돌아감
 const moveList = () => {
   router.push({ name: "whole-article-list" });
@@ -50,6 +64,17 @@ const moveList = () => {
           <div class="title-content">
             <v-text-field density="compact" placeholder="제목을 입력해주세요" name="title"></v-text-field>
           </div>
+        </div>
+        <div>
+          <v-col cols="12">
+            <v-combobox
+              :items="items"
+              label="type"
+              v-model="selectedValue"
+              item-title="title"
+              item-value="value"
+            ></v-combobox>
+          </v-col>
         </div>
         <v-divider :thickness="8" class="divider"></v-divider>
         <div class="content-container">

@@ -52,7 +52,9 @@ const moveModify = (articleNo) => {
       </div>
       <v-divider :thickness="8" color="info" class="divider"></v-divider>
       <div class="detail-content">
-        <img v-for="item in article.imageUrl" :src="item" class="centered-image" />
+        <template v-if="article.imageUrl && article.imageUrl.length > 0"
+          ><img v-for="item in article.imageUrl" :src="item" class="centered-image"
+        /></template>
         <pre v-text="article.content"></pre>
       </div>
       <div class="btn-container">
