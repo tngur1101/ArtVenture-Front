@@ -34,20 +34,9 @@ const getRegionArticles = async (params) => {
   });
 
   regionArticles.value = data.articles;
-  console.log("regiondArticles: ", regionArticles.value);
 };
 
-// getNotiArticles(notiParam.value);
-// getTendArticles(tendParam.value);
 getRegionArticles(regionParam.value);
-
-// const moveNoti = () => {
-//     router.push({name:"article-list", params: {type:"1"}});
-// }
-
-// const moveTend = () => {
-//     router.push({name:"article-list", params: {type:"3"}});
-// }
 
 const moveRegionBoard = () => {
   router.push({

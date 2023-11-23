@@ -6,7 +6,7 @@ import VPagination from "../../components/layout/VPagination.vue";
 import VSearchBar from "../../components/layout/VSearchBar.vue";
 
 const boardStore = useBoardStore();
-console.log("boardStore: ", boardStore);
+// console.log("boardStore: ", boardStore);
 
 const articles = computed(() => boardStore.articles);
 const totalPageCount = computed(() => boardStore.totalPageCount);
@@ -23,14 +23,14 @@ const params = ref({
   regionid: route.params.regionId,
 });
 
-console.log(params);
+// console.log(params);
 
 watch(
   () => route.params.type,
   (newType) => {
     params.value.type = newType;
     boardStore.getArticles(params.value);
-    console.log("타입 변경");
+    // console.log("타입 변경");
   }
 );
 const selectTitle = "검색조건";
@@ -41,32 +41,24 @@ const selectOptions = ref([
 ]);
 
 boardStore.getArticles(params.value);
-console.log(params.value);
+// console.log(params.value);
 
 const moveDetail = (articleNo) => {
   router.push({ name: "article-detail", params: { articleNo } });
 };
 
 const changePage = async (pageNum) => {
-  console.log("페이지 변경, 페이지 번호: ", pageNum);
   params.value.pgno = pageNum;
   await boardStore.getArticles(params.value);
-  articles.value[0] = {};
 };
 
 const getSearchArticles = (key, word) => {
-  console.log("key : ", key, " word : ", word);
   params.value.key = key;
   params.value.word = word;
   params.value.pgno = 1;
 
   boardStore.getArticles(params.value);
 };
-
-const searchInfo = ref({
-  key: "",
-  word: "",
-});
 </script>
 
 <template>
@@ -76,7 +68,12 @@ const searchInfo = ref({
         <v-row>
           <v-col cols="13">
             <v-card>
-              <v-img src="https://picsum.photos/350/165?random" height="400" cover class="bg-grey-lighten-2"></v-img>
+              <v-img
+                src="https://picsum.photos/350/165?random"
+                height="400"
+                cover
+                class="bg-grey-lighten-2"
+              ></v-img>
             </v-card>
           </v-col>
         </v-row>
@@ -84,9 +81,20 @@ const searchInfo = ref({
     </v-container>
     <div class="board-title-container">
       <div class="board-title">게시판 목록</div>
-      <v-btn class="write-btn"><RouterLink :to="{ name: 'article-write' }">글쓰기</RouterLink></v-btn>
-      <v-search-bar @search-keyword="getSearchArticles" :title="selectTitle" :options="selectOptions" />
+      <div>
+        <v-btn class="write-btn"
+          ><RouterLink :to="{ name: 'article-write' }"
+            >글쓰기</RouterLink
+          ></v-btn
+        >
+        <v-search-bar
+          @search-keyword="getSearchArticles"
+          :title="selectTitle"
+          :options="selectOptions"
+        />
+      </div>
     </div>
+
     <div class="card-container">
       <v-card class="vcard">
         <v-table>
@@ -99,7 +107,11 @@ const searchInfo = ref({
             </tr>
           </thead>
           <tbody>
-            <tr v-for="article in articles" :key="article.articleNo" @click="moveDetail(article.articleNo)">
+            <tr
+              v-for="article in articles"
+              :key="article.articleNo"
+              @click="moveDetail(article.articleNo)"
+            >
               <td>{{ article.articleNo }}</td>
               <td>{{ article.title }}</td>
               <td>{{ article.author }}</td>
@@ -107,7 +119,11 @@ const searchInfo = ref({
             </tr>
           </tbody>
         </v-table>
-        <v-pagination :total-page="totalPageCount" :total-visible="5" @click-page="(pgNum) => changePage(pgNum)" />
+        <v-pagination
+          :total-page="totalPageCount"
+          :total-visible="5"
+          @click-page="(pgNum) => changePage(pgNum)"
+        />
       </v-card>
     </div>
   </div>

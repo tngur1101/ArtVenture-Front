@@ -14,8 +14,8 @@ export const useBoardStore = defineStore("board", () => {
     const { data } = await local.get(`/board`, {
       params,
     });
-    console.log("params: ", params);
-    console.log("getArticles의 응답 데이터 : ", data);
+    // console.log("params: ", params);
+    // console.log("getArticles의 응답 데이터 : ", data);
 
     articles.value = data.articles;
     totalPageCount.value = data.totalPageCount;
@@ -25,7 +25,7 @@ export const useBoardStore = defineStore("board", () => {
   const article = ref({});
   const getArticle = async (articleNo) => {
     const { data } = await local.get(`/board/${articleNo}`);
-    console.log(`getArticle(${articleNo})의 응답 데이터 : `, data);
+    // console.log(`getArticle(${articleNo})의 응답 데이터 : `, data);
 
     article.value = data;
   };
@@ -39,19 +39,19 @@ export const useBoardStore = defineStore("board", () => {
     },
   };
   const writeArticle = async (article) => {
-    console.log("registArticle() 요청, 등록데이터 : ", article);
+    // console.log("registArticle() 요청, 등록데이터 : ", article);
     return await local.post(`/board`, article, writeConfig);
   };
 
   /*========================삭제====================== */
   const deleteArticle = async (articleNo) => {
-    console.log("삭제 요청 보냄 삭제 글번호: ", articleNo);
+    // console.log("삭제 요청 보냄 삭제 글번호: ", articleNo);
     return await local.delete(`/board/${articleNo}`);
   };
 
   /*=============수정========================= */
   const modifyArticle = async (article) => {
-    console.log("modifyArticle() 요청, 수정데이터: ", article);
+    // console.log("modifyArticle() 요청, 수정데이터: ", article);
     return await local.put(`/board`, article);
   };
 

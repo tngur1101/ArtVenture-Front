@@ -1,19 +1,23 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useBoardStore } from "@/stores/board";
+import { useAuthStore } from "../../stores/auth";
 
 const boardStore = useBoardStore();
+const authStore = useAuthStore();
+const { user } = authStore;
 const article = computed(() => {
-  console.log(boardStore.article);
+  // console.log(boardStore.article);
+  checkAuthor();
   return boardStore.article;
 }); //store 데이터를 반응형으로 가져오기
 
 const router = useRouter();
 const route = useRoute();
-
+const isAuthor = ref(null);
 boardStore.getArticle(route.params.articleNo);
-console.log(article.value);
+// console.log(article.value);
 
 const deleteArticle = async () => {
   try {
@@ -31,6 +35,10 @@ const deleteArticle = async () => {
 const moveModify = (articleNo) => {
   router.push({ name: "article-modify", params: { articleNo } });
 };
+
+function checkAuthor() {
+  isAuthor.value = boardStore.article.author === user.nickname;
+}
 </script>
 
 <template>
@@ -53,12 +61,17 @@ const moveModify = (articleNo) => {
       <v-divider :thickness="8" color="info" class="divider"></v-divider>
       <div class="detail-content">
         <template v-if="article.imageUrl && article.imageUrl.length > 0"
-          ><img v-for="item in article.imageUrl" :src="item" class="centered-image"
+          ><img
+            v-for="item in article.imageUrl"
+            :src="item"
+            class="centered-image"
         /></template>
         <pre v-text="article.content"></pre>
       </div>
-      <div class="btn-container">
-        <v-btn class="modify-btn" @click="moveModify(article.articleNo)">수정</v-btn>
+      <div v-if="isAuthor" class="btn-container">
+        <v-btn class="modify-btn" @click="moveModify(article.articleNo)"
+          >수정</v-btn
+        >
         <v-btn class="delete-btn" @click="deleteArticle">삭제</v-btn>
       </div>
     </v-card>

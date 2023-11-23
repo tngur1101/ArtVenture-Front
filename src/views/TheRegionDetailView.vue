@@ -13,7 +13,7 @@ const region = ref({});
 const places = ref([]);
 const selectPlace = ref({});
 
-console.log(route.params.regionId);
+// console.log(route.params.regionId);
 
 onMounted(() => {
   getRegion();
@@ -26,16 +26,15 @@ const notComplete = computed(() => {
 });
 
 const getRegion = () => {
-  console.log(regionId + "번 지역 요청");
   detailRegion(
     regionId,
     ({ data }) => {
       region.value = data;
-      console.log("data : ", data);
+      // console.log("data : ", data);
       places.value = region.value.featList;
-      console.log("places : ", places);
-      console.log("complete : ", region.value.completeList);
-      console.log("notComplete : ", notComplete.value);
+      // console.log("places : ", places);
+      // console.log("complete : ", region.value.completeList);
+      // console.log("notComplete : ", notComplete.value);
     },
     (error) => {
       console.log(error);
@@ -44,7 +43,6 @@ const getRegion = () => {
 };
 
 const clickPlace = (nowPlace) => {
-  console.log(nowPlace);
   selectPlace.value = nowPlace;
 };
 </script>

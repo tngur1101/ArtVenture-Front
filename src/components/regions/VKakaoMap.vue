@@ -96,6 +96,14 @@ const loadMarkers = () => {
       clickable: true, // // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
       // image: markerImage, // 마커의 이미지
     });
+
+    kakao.maps.event.addListener(marker, "click", () => {
+      //마커 position을 출력합니다.
+      console.log(marker);
+      console.log("이름 : ", marker.getTitle());
+      console.log("위도 : ", marker.getPosition().getLat());
+      console.log("경도 : ", marker.getPosition().getLng());
+    });
     markers.value.push(marker);
   });
 
@@ -145,17 +153,8 @@ const drawLines = () => {
     strokeStyle: "solid", // 선의 스타일입니다
   });
 
-  // var polyline2 = new kakao.maps.Polyline({
-  //   path: lines2.value, // 선을 구성하는 좌표배열 입니다
-  //   strokeWeight: 5, // 선의 두께 입니다
-  //   strokeColor: "#000000", // 선의 색깔입니다
-  //   strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-  //   strokeStyle: "solid", // 선의 스타일입니다
-  // });
-
   // 지도에 선을 표시합니다
   polyline.setMap(map.value);
-  // polyline2.setMap(map.value);
 };
 </script>
 

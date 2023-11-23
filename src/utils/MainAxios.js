@@ -13,7 +13,7 @@ const instance = axios.create({
 //비동기 요청 전 인터셉트
 instance.interceptors.request.use(
   (config) => {
-    console.log("config : ", config);
+    // console.log("config : ", config);
     const authStore = useAuthStore();
 
     config.headers.Authorization = `Bearer ${authStore.token}`;

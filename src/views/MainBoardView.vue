@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import instance from "../utils/MainAxios";
 const axios = instance;
 const router = useRouter();
@@ -29,7 +29,7 @@ const getNotiArticles = async (params) => {
   });
 
   notiArticles.value = data.articles;
-  console.log("notiArticles: ", notiArticles.value);
+  // console.log("notiArticles: ", notiArticles.value);
 };
 
 const getTendArticles = async (params) => {
@@ -38,7 +38,7 @@ const getTendArticles = async (params) => {
   });
 
   tendArticles.value = data.articles;
-  console.log("tendArticles: ", tendArticles.value);
+  // console.log("tendArticles: ", tendArticles.value);
 };
 
 getNotiArticles(notiParam.value);

@@ -22,15 +22,15 @@ const items = [
 const write = async () => {
   try {
     const imageData = new FormData(boardForm.value);
-    console.log("form !!!!!!!!!!", imageData);
+    // console.log("form !!!!!!!!!!", imageData);
     imageData.append("author", authStore.user.nickname);
     imageData.append("type", selectedValue.value.value);
 
     if (!confirm("이대로 등록하시겠습니까?")) return;
     // console.log(writeForm.value.fileInfo);
-    console.log("formData:");
+    // console.log("formData:");
     for (const entry of imageData.entries()) {
-      console.log(entry[0], entry[1]);
+      // console.log(entry[0], entry[1]);
     }
     // await boardStore.writeArticle(writeForm.value);
     await boardStore.writeArticle(imageData);
@@ -56,13 +56,22 @@ const moveList = () => {
 
 <template>
   <div style="margin-top: 7%" class="write-page">
-    <v-card variant="outlined" class="write-container" elevation="8" rounded="lg">
+    <v-card
+      variant="outlined"
+      class="write-container"
+      elevation="8"
+      rounded="lg"
+    >
       <div class="aaa">글 작성</div>
       <form ref="boardForm">
         <div class="title-container">
           <div class="title">제목</div>
           <div class="title-content">
-            <v-text-field density="compact" placeholder="제목을 입력해주세요" name="title"></v-text-field>
+            <v-text-field
+              density="compact"
+              placeholder="제목을 입력해주세요"
+              name="title"
+            ></v-text-field>
           </div>
         </div>
         <div>
@@ -92,7 +101,11 @@ const moveList = () => {
           </div>
         </div>
         <div class="img-container">
-          <v-file-input multiple label="이미지 넣기" name="files"></v-file-input>
+          <v-file-input
+            multiple
+            label="이미지 넣기"
+            name="files"
+          ></v-file-input>
         </div>
         <div class="btn-container">
           <v-btn class="regist-btn" @click="write">등록</v-btn>
