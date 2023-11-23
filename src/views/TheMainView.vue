@@ -10,20 +10,15 @@ import MainBoardView from "./MainBoardView.vue";
   <div>게시판 자리</div> -->
   <div>
     <v-carousel show-arrows="hover">
-      <v-carousel-item
-        src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-        cover
-      >
+      <v-carousel-item cover><img src="@/assets/images/Daegu.jpg" alt="" class="crousel-image" /> </v-carousel-item>
+      <v-carousel-item cover><img src="@/assets/images/Daejeon.jpg" alt="" class="crousel-image" /> </v-carousel-item>
+      <v-carousel-item cover><img src="@/assets/images/Gyeongju.jpg" alt="" class="crousel-image" /> </v-carousel-item>
+      <v-carousel-item cover><img src="@/assets/images/Jeonju.jpg" alt="" class="crousel-image" /> </v-carousel-item>
+      <v-carousel-item cover
+        ><img src="@/assets/images/SeokchonLake.jpg" alt="" class="crousel-image" />
       </v-carousel-item>
-      <v-carousel-item
-        src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
-        cover
-      >
-      </v-carousel-item>
-      <v-carousel-item
-        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-        cover
-      >
+      <v-carousel-item cover
+        ><img src="@/assets/images/SeongsanSunrisePeak.jpg" alt="" class="crousel-image" />
       </v-carousel-item>
     </v-carousel>
   </div>
@@ -35,4 +30,10 @@ import MainBoardView from "./MainBoardView.vue";
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.crousel-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+</style>
