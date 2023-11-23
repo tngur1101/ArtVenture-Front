@@ -29,9 +29,15 @@ const search = () => {
       hide-details
       v-model="word"
       @click:append-inner="$emit('searchKeyword', key, word)"
-      :class="['v-col-10', 'pa-0']"
+      :class="['v-col-10', 'pa-0', 'custom-text-field']"
     ></v-text-field>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.custom-text-field {
+  border-radius: 12px; /* 원하는 border radius 값으로 조정 */
+  width: 50% !important; /* 원하는 너비 값으로 조정 */
+  margin-left: 2%;
+}
+</style>
