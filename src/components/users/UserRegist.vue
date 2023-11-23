@@ -26,16 +26,10 @@ const regist = async () => {
 </script>
 
 <template>
-  <div>
+  <div style="margin-top: 10%">
     <v-card class="mx-auto" max-width="448" title="User Registration">
       <v-container>
-        <v-text-field
-          v-model="registForm.id"
-          color="primary"
-          label="id"
-          variant="underlined"
-        >
-        </v-text-field>
+        <v-text-field v-model="registForm.id" color="primary" label="id" variant="underlined"> </v-text-field>
 
         <v-text-field
           v-model="registForm.password"
@@ -46,12 +40,7 @@ const regist = async () => {
           type="password"
         ></v-text-field>
 
-        <v-text-field
-          v-model="registForm.name"
-          color="primary"
-          label="name"
-          variant="underlined"
-        ></v-text-field>
+        <v-text-field v-model="registForm.name" color="primary" label="name" variant="underlined"></v-text-field>
 
         <v-text-field
           v-model="registForm.nickname"
@@ -60,11 +49,7 @@ const regist = async () => {
           variant="underlined"
         ></v-text-field>
 
-        <v-checkbox
-          v-model="terms"
-          color="secondary"
-          label="I agree to site terms and conditions"
-        ></v-checkbox>
+        <v-checkbox v-model="terms" color="secondary" label="I agree to site terms and conditions"></v-checkbox>
       </v-container>
 
       <v-divider></v-divider>

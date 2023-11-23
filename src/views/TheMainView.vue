@@ -35,4 +35,10 @@ import MainBoardView from "./MainBoardView.vue";
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.crousel-image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+</style>
